@@ -34,15 +34,11 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-namespace :deploy do
+# デフォルトの task をすべて消す
+framework_tasks = %i(starting started updating updated publishing published finishing finished)
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
+framework_tasks.each do |t|
+  Rake::Task["deploy:#{t}"].clear
 end
+
+Rake::Task[:deploy].clear
