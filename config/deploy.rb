@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'hackathon_sample'
+set :repo_url, 'git@github.com:yucao24hours/hackathon_sample.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -42,3 +42,28 @@ framework_tasks.each do |t|
 end
 
 Rake::Task[:deploy].clear
+
+# タスクの定義はこのようにやる
+task :sample_task do
+  # ローカルマシン上で動作するコマンド
+  run_locally do
+    # execute 'コマンド名'
+
+    # NOTE execute コマンドだと標準出力は捨てられてしまうので、それを見る必要がある場合は capture メソッドを使って、
+    # 戻り値として得た標準出力を使うことができる。
+    # 戻り値をいい具合にログ出力するには info メソッドを使う。
+    output = capture 'コマンド名'
+    info output
+  end
+
+  # サーバ上で動作するコマンド
+  on '対象サーバ' do
+    # execute 'コマンド名'
+
+    # NOTE execute コマンドだと標準出力は捨てられてしまうので、それを見る必要がある場合は capture メソッドを使って、
+    # 戻り値として得た標準出力を使うことができる。
+    # 戻り値をいい具合にログ出力するには info メソッドを使う。
+    output = capture 'コマンド名'
+    info output
+  end
+end
