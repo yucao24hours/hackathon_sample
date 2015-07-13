@@ -11,8 +11,12 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-group :development, :test do
-  gem 'byebug'
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
+group :development do
+  gem 'capistrano-rails', '~> 1.1.1'
+
+  group :test do
+    gem 'byebug'
+    gem 'web-console', '~> 2.0'
+    gem 'spring'
+  end
 end
