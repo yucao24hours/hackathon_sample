@@ -8,7 +8,7 @@ set :repo_url, 'git@github.com:yucao24hours/hackathon_sample.git'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
+# set :deploy_to, '/var/www/hackathon_sample'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -35,35 +35,49 @@ set :repo_url, 'git@github.com:yucao24hours/hackathon_sample.git'
 # set :keep_releases, 5
 
 # デフォルトの task をすべて消す
-framework_tasks = %i(starting started updating updated publishing published finishing finished)
-
-framework_tasks.each do |t|
-  Rake::Task["deploy:#{t}"].clear
-end
-
-Rake::Task[:deploy].clear
+# framework_tasks = %i(starting started updating updated publishing published finishing finished)
+#
+# framework_tasks.each do |t|
+#   Rake::Task["deploy:#{t}"].clear
+# end
+#
+# Rake::Task[:deploy].clear
 
 # タスクの定義はこのようにやる
-task :sample_task do
-  # ローカルマシン上で動作するコマンド
-  run_locally do
-    # execute 'コマンド名'
+# task :sample_task do
+#   # ローカルマシン上で動作するコマンド
+#   run_locally do
+#     # execute 'コマンド名'
+#
+#     # NOTE execute コマンドだと標準出力は捨てられてしまうので、それを見る必要がある場合は capture メソッドを使って、
+#     # 戻り値として得た標準出力を使うことができる。
+#     # 戻り値をいい具合にログ出力するには info メソッドを使う。
+#     output = capture 'コマンド名'
+#     info output
+#   end
+#
+#   # サーバ上で動作するコマンド
+#   on '対象サーバ' do
+#     # execute 'コマンド名'
+#
+#     # NOTE execute コマンドだと標準出力は捨てられてしまうので、それを見る必要がある場合は capture メソッドを使って、
+#     # 戻り値として得た標準出力を使うことができる。
+#     # 戻り値をいい具合にログ出力するには info メソッドを使う。
+#     output = capture 'コマンド名'
+#     info output
+#   end
+# end
 
-    # NOTE execute コマンドだと標準出力は捨てられてしまうので、それを見る必要がある場合は capture メソッドを使って、
-    # 戻り値として得た標準出力を使うことができる。
-    # 戻り値をいい具合にログ出力するには info メソッドを使う。
-    output = capture 'コマンド名'
-    info output
-  end
-
-  # サーバ上で動作するコマンド
-  on '対象サーバ' do
-    # execute 'コマンド名'
-
-    # NOTE execute コマンドだと標準出力は捨てられてしまうので、それを見る必要がある場合は capture メソッドを使って、
-    # 戻り値として得た標準出力を使うことができる。
-    # 戻り値をいい具合にログ出力するには info メソッドを使う。
-    output = capture 'コマンド名'
-    info output
-  end
-end
+# task :update do
+#   run_locally do
+#     application = fetch :application
+#     if test "[ -d #{application} ]"
+#       exechte "cd #{application}; git pull"
+#     else
+#       execute "git clone #{fetch :repo_url} #{application}"
+#     end
+#   end
+# end
+#
+# task :deploy do
+# end

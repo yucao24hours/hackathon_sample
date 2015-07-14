@@ -1,3 +1,5 @@
+server '192.168.33.10', user: 'vagrant', roles: %w{app}
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
